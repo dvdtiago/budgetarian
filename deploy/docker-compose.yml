@@ -1,0 +1,16 @@
+services:
+  budgetarian:
+    image: dvdtiago/budgetarian:latest
+    restart: unless-stopped
+    ports:
+      - "731:5006"
+    volumes:
+      - budgetarian-data:/data
+    environment:
+      - ACTUAL_PORT=5006
+      - ACTUAL_DATA_DIR=/data
+      # Set a server password on first run via the UI, or pre-set with:
+      # ACTUAL_LOGIN_METHOD=password
+
+volumes:
+  budgetarian-data:
