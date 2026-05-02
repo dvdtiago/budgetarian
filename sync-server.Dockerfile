@@ -31,12 +31,12 @@ COPY packages/ ./packages/
 # Increase memory limit for the build process to 8GB
 ENV NODE_OPTIONS=--max_old_space_size=8192
 
-# Build all workspace package dependencies (loot-core, component-library, crdt, etc.)
-RUN yarn build
-# Build the browser frontend directly — bypasses package-browser's lage --to flag
-# which fails in lage 2.15.x, and skips the multi-language translation pull
+# Build each workspace in dependency order, bypassing lage which fails to
+# discover workspaces in this environment
+RUN yarn workspace @actual-app/crdt build
+RUN yarn workspace @actual-app/core build
+RUN yarn workspace plugins-service build
 RUN yarn workspace @actual-app/web build:browser
-# Build the sync server
 RUN yarn workspace @actual-app/sync-server build
 
 # Focus the workspaces in production mode (including @actual-app/web you just built)
