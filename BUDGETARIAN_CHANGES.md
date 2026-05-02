@@ -9,6 +9,8 @@ Running log of every divergence from upstream Actual Budget. Keep this updated a
 - Added `CLAUDE.md` budgetarian context block (appended after upstream `@AGENTS.md` reference)
 - Added `BUDGETARIAN_CHANGES.md` (this file)
 - Added `deploy/docker-compose.yml` — production single-container deployment on port 731
+- `sync-server.Dockerfile`: bypassed lage (fails to discover workspaces in Docker) with explicit per-workspace build commands
+- `sync-server.Dockerfile`: fixed runtime crash — replaced dangling `@actual-app/crdt` workspace symlink with copied `dist/` artifacts (same pattern already used for `@actual-app/web`)
 
 ---
 
